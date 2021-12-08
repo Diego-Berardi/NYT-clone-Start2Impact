@@ -5,20 +5,31 @@ import Header from "../components/Header";
 import NewsContainer from "../components/NewsContainer";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
+
 import NoMatchPage from "./NoMatchPage";
+import Loading from "./LoadingPage";
 
 const Home = () => {
 
 
-  const { HomePageNews, showMenu, setShowMenu, isError } = useGlobalContext();
+  const {
+    HomePageNews,
+    showMenu,
+    setShowMenu,
+    isError,
+    isLoading,
+    fetchHomePageNews,
+  } = useGlobalContext();
 
-  
   useEffect(() => {
+    fetchHomePageNews();
     setShowMenu(false);
   }, []);
 
 
-  if (isError || HomePageNews === undefined ) return <NoMatchPage />;
+  if(isLoading) return <Loading />
+
+  if (isError ||( HomePageNews.length <1 && !(isLoading)) ) return <NoMatchPage />;
 
   return (
     <>

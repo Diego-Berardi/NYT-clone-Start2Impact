@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { FiMenu } from "react-icons/fi";
 import { GrClose } from "react-icons/gr";
 import { BsSearch } from "react-icons/bs";
 import imgLogoNYT from "../assets/img/1200px-NewYorkTimes.svg.png";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 import SearchBar from "./SearchBar";

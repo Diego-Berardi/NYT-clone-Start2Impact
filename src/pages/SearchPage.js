@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 import NoMatchPage from "./NoMatchPage";
+import Loading from "./LoadingPage";
 
 import Header from "../components/Header";
 import SearchNewsItem from "../components/SearchNewsItem";
@@ -16,6 +17,8 @@ const SearchPage = () => {
     setShowInputSearchBar,
     showMenu,
     setShowMenu,
+    isLoading,
+    isError,
   } = useGlobalContext();
   const { fetchSearchList } = useGlobalContext();
   const [listNews, setListNews] = useState([]);
@@ -32,11 +35,16 @@ const SearchPage = () => {
   }, [searchValue]);
 
   useEffect(() => {
+    getData();
     setShowInputSearchBar(false);
     setShowMenu(false);
   }, []);
 
-  if (searchValue === undefined) return <NoMatchPage />;
+  // if (searchValue === undefined) return <NoMatchPage />;
+
+  if (isLoading) return <Loading />;
+
+  if (isError || (listNews.length < 1 && !isLoading)|| !searchValue) return <NoMatchPage />;
 
   return (
     <>

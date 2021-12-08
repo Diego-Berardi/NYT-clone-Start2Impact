@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AppContext = React.createContext();
 
 const api_key = process.env.REACT_APP_API_KEY;
 const HomePageNews_url = `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${api_key}`;
-const search_url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=italy&api-key=${api_key}`;
 
 const AppProvider = ({ children }) => {
   const [HomePageNews, setHomePageNews] = useState([]);
@@ -15,41 +14,51 @@ const AppProvider = ({ children }) => {
   const [showInputSearchBar, setShowInputSearchBar] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const refContainer = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   let navigate = useNavigate();
 
   const fetchSearchList = async (value) => {
+    setIsLoading(true);
+
     try {
       const response = await fetch(
         `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&api-key=${api_key}`
       );
       const data = await response.json();
+      setIsLoading(false);
+
       return data;
     } catch (error) {
+      setIsLoading(false);
       setIsError(true);
     }
   };
 
   const fetchHomePageNews = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(HomePageNews_url);
       const data = await response.json();
       const list = data.results;
+      setIsLoading(false);
+
       setHomePageNews(list);
     } catch (error) {
+      setIsLoading(false);
       setIsError(true);
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (refContainer.current.value === "") return;
-    setSearchValue(refContainer.current.value);
+    if (e.target[0].value === "") return;
+
+    const value = e.target[0].value;
+
+    setShowMenu(false);
+    setSearchValue(value);
     navigate(`/searchNews`);
   };
-
-  useEffect(() => {
-    fetchHomePageNews();
-  }, []);
 
   return (
     <AppContext.Provider
@@ -60,11 +69,13 @@ const AppProvider = ({ children }) => {
         setSearchValue,
         showInputSearchBar,
         setShowInputSearchBar,
-        refContainer,
         handleSubmit,
         showMenu,
         setShowMenu,
         isError,
+        isLoading,
+        setIsLoading,
+        fetchHomePageNews,
       }}
     >
       {children}
