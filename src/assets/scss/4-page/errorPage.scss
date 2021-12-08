@@ -1,0 +1,14 @@
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 4rem;
+    gap: 1rem;
+    .link{
+        color: #0059ff;
+    }
+    .link:hover {
+        text-decoration: underline;
+    }
+}

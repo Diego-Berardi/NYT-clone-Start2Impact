@@ -1,0 +1,23 @@
+*,
+*::after,
+*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    color: var(--default-text-color);
+}
+img {
+    max-width: 100%;
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+}
+a{
+    text-decoration: none;
+    color:black;
+}

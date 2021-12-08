@@ -1,0 +1,16 @@
+@import './1/variables.scss';
+@import './2/general.scss';
+@import './2/display.scss';
+@import './2/typography.scss';
+
+
+@import './3-section-componets/headerSection.scss';
+@import './3-section-componets/searchBar.scss';
+@import './3-section-componets/newsItem.scss';
+@import './3-section-componets/menu.scss';
+
+
+@import './4-page/homePage.scss';
+@import './4-page/noMatchPage.scss';
+@import './4-page/searchPage.scss';
+@import './4-page/errorPage.scss';

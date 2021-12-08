@@ -1,0 +1,30 @@
+form {
+    display: flex;
+    gap: .5rem;
+
+  .search-bar {
+    outline: none;
+    padding: 0 0.6rem;
+    border-radius: 2px;
+    border: rgb(109, 109, 109) solid 1px;
+  }
+  .btn-submit {
+    padding: 0.3rem;
+    background-color: #0043a779;
+    border: none;
+    border-radius: 5px;
+    color: white;
+  }
+  .btn-submit:hover {
+    background-color: #0043a7c2;
+    cursor: pointer;
+  }
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin: 2rem;
+}
