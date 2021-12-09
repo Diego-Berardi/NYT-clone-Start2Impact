@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="container footer">
-      <h2>The New York Times</h2>
+      <h2>The New York Times Clone</h2>
 
       <div>
         <Link to="/" className="link link-footer">
