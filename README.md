@@ -1,3 +1,9 @@
+# New York Times Clone
+This is the React project for Start2Ipact, this website is a clone of the New York Times. I developed the project with the NYT api: https://developer.nytimes.com/get-started .
+
+You can see the website here: https://new-york-times-clone.netlify.app/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
