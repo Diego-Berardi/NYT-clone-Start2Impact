@@ -1,5 +1,4 @@
 import React from "react";
-import { useGlobalContext } from "../context";
 import NewsItem from "../components/NewsItem";
 
 const MainNewsContainer = ({listNews, classContainer, classItem}) => {
