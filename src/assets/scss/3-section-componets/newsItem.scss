@@ -1,5 +1,9 @@
 .news-item {
   .content {
+    h3{
+
+      transition: color 150ms ease-in-out;
+    }
     .abstract {
       color: var(--abstract-text-color);
       margin: 0.7em 0;
@@ -19,6 +23,13 @@
     width: 100%;
     background-color: #1f1f1f;
     margin: 1rem 0;
+  }
+}
+
+.news-item:hover {
+  .content h3{
+    
+    color: #686868 ;
   }
 }
 

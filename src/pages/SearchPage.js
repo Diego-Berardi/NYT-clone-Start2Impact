@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import SearchNewsItem from "../components/SearchNewsItem";
 import SearchBar from "../components/SearchBar";
 import Menu from "../components/Menu";
+import Footer from "../components/Footer";
 
 const SearchPage = () => {
   const {
@@ -44,7 +45,8 @@ const SearchPage = () => {
 
   if (isLoading) return <Loading />;
 
-  if (isError || (listNews.length < 1 && !isLoading)|| !searchValue) return <NoMatchPage />;
+  if (isError || (listNews.length < 1 && !isLoading) || !searchValue)
+    return <NoMatchPage />;
 
   return (
     <>
@@ -62,6 +64,7 @@ const SearchPage = () => {
             })}
           </div>
         </section>
+        <Footer />
       </main>
     </>
   );

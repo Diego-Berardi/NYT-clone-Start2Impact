@@ -1,0 +1,24 @@
+.footer{
+    border-top: black solid 1px;
+    margin: 1rem auto;
+    h2{
+        padding: 1rem 0;
+    }
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        .link-footer{
+            margin: 1rem;
+        }
+        .icons{
+            font-size: 2rem;
+            transition: color 150ms ease-in-out;
+        }
+        .icons:hover{
+
+            color: #727272;
+        }
+    }
+  }

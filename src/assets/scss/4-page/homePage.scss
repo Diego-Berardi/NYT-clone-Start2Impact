@@ -18,9 +18,7 @@ main {
       background-color: #979797;
     }
   }
-  footer{
-    border-top: black solid 1px;
-  }
+  
 }
 
 @media only screen and (min-width: 1080px) {
@@ -48,7 +46,7 @@ main {
       .footer-news-container {
         grid-area: footer;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
 
         margin: 2rem 0;
       }

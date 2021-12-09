@@ -13,7 +13,7 @@ const NewsItem = ({ title, multimedia, abstract, link_url, classItem }) => {
       <a href={link_url}>
         <div className="content">
           <div>
-            <h2 className="title-news">{title}</h2>
+            <h3 className="title-news">{title}</h3>
             <p className="abstract">{abstract}</p>
           </div>
           <figure>

@@ -4,13 +4,12 @@ import { useGlobalContext } from "../context";
 import Header from "../components/Header";
 import NewsContainer from "../components/NewsContainer";
 import Menu from "../components/Menu";
+import Footer from "../components/Footer";
 
 import NoMatchPage from "./NoMatchPage";
 import Loading from "./LoadingPage";
 
 const Home = () => {
-
-
   const {
     HomePageNews,
     showMenu,
@@ -25,10 +24,10 @@ const Home = () => {
     setShowMenu(false);
   }, []);
 
+  if (isLoading) return <Loading />;
 
-  if(isLoading) return <Loading />
-
-  if (isError ||( HomePageNews.length <1 && !(isLoading)) ) return <NoMatchPage />;
+  if (isError || (HomePageNews.length < 1 && !isLoading))
+    return <NoMatchPage />;
 
   return (
     <>
@@ -52,6 +51,7 @@ const Home = () => {
             listNews={HomePageNews.filter((elem, i) => i >= 16)}
           />
         </section>
+        <Footer />
       </main>
     </>
   );
