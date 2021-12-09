@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const AppContext = React.createContext();
 
+const axios = require("axios").default;
+
 const api_key = process.env.REACT_APP_API_KEY;
 const HomePageNews_url = `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${api_key}`;
 
@@ -22,13 +24,18 @@ const AppProvider = ({ children }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&api-key=${api_key}`
+      const res = await axios.get(
+        "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+        {
+          params: {
+            q: value,
+            "api-key": api_key,
+          },
+        }
       );
-      const data = await response.json();
       setIsLoading(false);
 
-      return data;
+      return res.data;
     } catch (error) {
       setIsLoading(false);
       setIsError(true);
@@ -38,11 +45,18 @@ const AppProvider = ({ children }) => {
   const fetchHomePageNews = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(HomePageNews_url);
-      const data = await response.json();
-      const list = data.results;
-      setIsLoading(false);
+      const res = await axios.get(
+        "https://api.nytimes.com/svc/topstories/v2/home.json",
+        {
+          params: {
+            "api-key": `${api_key}`,
+          },
+        }
+      );
 
+      const list = res.data.results;
+
+      setIsLoading(false);
       setHomePageNews(list);
     } catch (error) {
       setIsLoading(false);

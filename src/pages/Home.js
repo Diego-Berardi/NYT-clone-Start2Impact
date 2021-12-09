@@ -3,7 +3,6 @@ import { useGlobalContext } from "../context";
 
 import Header from "../components/Header";
 import NewsContainer from "../components/NewsContainer";
-import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 
 import NoMatchPage from "./NoMatchPage";
@@ -53,7 +52,6 @@ const Home = () => {
             listNews={HomePageNews.filter((elem, i) => i >= 16)}
           />
         </section>
-        <Footer />
       </main>
     </>
   );

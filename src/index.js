@@ -8,6 +8,7 @@ import { AppProvider } from "./context";
 // require for dotenv
 require("dotenv").config();
 
+
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
