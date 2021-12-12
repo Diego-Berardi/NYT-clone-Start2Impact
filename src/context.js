@@ -1,68 +1,20 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AppContext = React.createContext();
 
-const axios = require("axios").default;
-
 const api_key = process.env.REACT_APP_API_KEY;
 const HomePageNews_url = `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${api_key}`;
+const searchNews_urlBase = `https://api.nytimes.com/svc/search/v2/articlesearch.json?`;
 
 const AppProvider = ({ children }) => {
-  const [HomePageNews, setHomePageNews] = useState([]);
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
   const [showInputSearchBar, setShowInputSearchBar] = useState(false);
-  const [isError, setIsError] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-  let navigate = useNavigate();
-
-  const fetchSearchList = async (value) => {
-    setIsLoading(true);
-
-    try {
-      const res = await axios.get(
-        "https://api.nytimes.com/svc/search/v2/articlesearch.json",
-        {
-          params: {
-            q: value,
-            "api-key": api_key,
-          },
-        }
-      );
-      setIsLoading(false);
-
-      return res.data;
-    } catch (error) {
-      setIsLoading(false);
-      setIsError(true);
-    }
-  };
-
-  const fetchHomePageNews = async () => {
-    setIsLoading(true);
-    try {
-      const res = await axios.get(
-        "https://api.nytimes.com/svc/topstories/v2/home.json",
-        {
-          params: {
-            "api-key": `${api_key}`,
-          },
-        }
-      );
-
-      const list = res.data.results;
-
-      setIsLoading(false);
-      setHomePageNews(list);
-    } catch (error) {
-      setIsLoading(false);
-      setIsError(true);
-    }
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target[0].value === "") return;
@@ -74,11 +26,20 @@ const AppProvider = ({ children }) => {
     navigate(`/searchNews`);
   };
 
+  const getImg_url = (url) => {
+    return `https://static01.nyt.com/${url}`;
+  };
+
+  const getLink = (value) => {
+    if (!value) return;
+    const searchNews_url = `${searchNews_urlBase}q=${value}&api-key=${api_key}`;
+    return searchNews_url;
+  };
+
   return (
     <AppContext.Provider
       value={{
-        HomePageNews,
-        fetchSearchList,
+        HomePageNews_url,
         searchValue,
         setSearchValue,
         showInputSearchBar,
@@ -86,10 +47,8 @@ const AppProvider = ({ children }) => {
         handleSubmit,
         showMenu,
         setShowMenu,
-        isError,
-        isLoading,
-        setIsLoading,
-        fetchHomePageNews,
+        getLink,
+        getImg_url,
       }}
     >
       {children}

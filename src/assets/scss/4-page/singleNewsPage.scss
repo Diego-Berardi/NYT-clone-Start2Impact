@@ -1,0 +1,18 @@
+.single-news-container{
+    max-width: 800px !important;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    div{
+        h1{
+            font-size: 2rem;
+        }
+    }
+    .information{
+        display: flex;
+        justify-content: space-between;
+        color: #444444;
+    }
+
+}

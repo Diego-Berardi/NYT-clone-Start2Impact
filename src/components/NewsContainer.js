@@ -5,14 +5,16 @@ const MainNewsContainer = ({listNews, classContainer, classItem}) => {
   
   return (
     <div className={`news-container ${classContainer}`}>
-      {listNews.map((elem, index) => {
-        const { url } = elem;
+      {listNews.map((elem) => {
+        const { url, copyright, caption } = elem.multimedia[0];
         return (
           <NewsItem
             key={elem.title}
             {...elem}
-            link_url={url}
             classItem={classItem}
+            url={url}
+            copyright={copyright}
+            caption={caption}
           />
         );
       })}

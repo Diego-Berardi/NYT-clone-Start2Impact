@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 import { useGlobalContext } from "../context";
+import useFetch from "../useFetch";
 
 import NoMatchPage from "./NoMatchPage";
 import Loading from "./LoadingPage";
 
 import Header from "../components/Header";
-import SearchNewsItem from "../components/SearchNewsItem";
+import NewsItem from "../components/NewsItem";
 import SearchBar from "../components/SearchBar";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
@@ -14,39 +14,32 @@ import Footer from "../components/Footer";
 const SearchPage = () => {
   const {
     searchValue,
-    setSearchValue,
     setShowInputSearchBar,
-    showMenu,
     setShowMenu,
-    isLoading,
-    isError,
+    getLink,
+    getImg_url,
   } = useGlobalContext();
-  const { fetchSearchList } = useGlobalContext();
-  const [listNews, setListNews] = useState([]);
 
-  const getData = async () => {
-    const data = await fetchSearchList(searchValue);
-    setListNews(data.response.docs);
-  };
+  const { data, isLoading, isError, fetchData } = useFetch(
+    getLink(searchValue)
+  );
 
   useEffect(() => {
-    if (searchValue === undefined) return;
+    if (!searchValue) return;
 
-    getData();
+    fetchData(getLink(searchValue));
   }, [searchValue]);
 
   useEffect(() => {
-    getData();
     setShowInputSearchBar(false);
     setShowMenu(false);
   }, []);
 
-  // if (searchValue === undefined) return <NoMatchPage />;
-
   if (isLoading) return <Loading />;
-
-  if (isError || (listNews.length < 1 && !isLoading) || !searchValue)
-    return <NoMatchPage />;
+  if (isError) return <NoMatchPage />;
+  if (!data) return <NoMatchPage />;
+  const listNews = data.response.docs;
+  if (listNews.length < 1) return <NoMatchPage />;
 
   return (
     <>
@@ -60,7 +53,15 @@ const SearchPage = () => {
           <div className="search-news-container">
             {listNews.map((elem) => {
               const title = elem.headline.main;
-              return <SearchNewsItem key={title} {...elem} title={title} />;
+
+              return (
+                <NewsItem
+                  key={title}
+                  title={title}
+                  {...elem}
+                  url={elem.multimedia[8] ? getImg_url(elem.multimedia[8].url) : ''}
+                />
+              );
             })}
           </div>
         </section>

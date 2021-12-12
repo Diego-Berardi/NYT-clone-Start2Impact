@@ -1,28 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const NewsItem = ({ title, multimedia, abstract, link_url, classItem }) => {
-  if(!multimedia) {
-    return <></>
-  }
-  const multimediaObj = multimedia[0];
+const NewsItem = ({ title, abstract, classItem, url, caption, copyright }) => {
   
-  const { url, copyright, caption } = multimediaObj;
 
   return (
     <article className={`news-item ${classItem}`}>
-      <a href={link_url}>
+      <Link to={`/news/${title}`} >
         <div className="content">
           <div>
             <h3 className="title-news">{title}</h3>
             <p className="abstract">{abstract}</p>
           </div>
+
           <figure>
             <img src={url} alt={caption} />
             <figcaption>{copyright}</figcaption>
           </figure>
         </div>
         <div className="divider"></div>
-      </a>
+      </Link>
     </article>
   );
 };

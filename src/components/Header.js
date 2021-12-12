@@ -8,14 +8,12 @@ import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 import SearchBar from "./SearchBar";
+const { DateTime, Info } = require("luxon");
 
 const Header = () => {
   const {
-    setSearchValue,
     showInputSearchBar,
     setShowInputSearchBar,
-    refContainer,
-    handleSubmit,
     showMenu,
     setShowMenu,
   } = useGlobalContext();
@@ -25,31 +23,10 @@ const Header = () => {
   };
 
   const date = new Date();
-  const weekday = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const monthName = month[date.getMonth()];
-  const day = weekday[date.getDay()];
+
+  const now = DateTime.now();
+  const dateStr = now.toFormat(" MMMM dd yyyy");
+  const day = Info.weekdays("long", { locale: "en" })[date.getDay()];
 
   return (
     <header className="header-container">
@@ -71,7 +48,7 @@ const Header = () => {
             <img src={imgLogoNYT} alt="The New York Times" />
           </Link>
         </div>
-        <div className="date">{`${day}, ${monthName} ${date.getDate()} ${date.getFullYear()}`}</div>
+        <div className="date">{`${day}, ${dateStr} `}</div>
       </nav>
     </header>
   );

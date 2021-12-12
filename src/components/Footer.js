@@ -17,10 +17,18 @@ const Footer = () => {
         </Link>
       </div>
       <div>
-        <a href="https://github.com/Diego-Berardi">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://github.com/Diego-Berardi"
+        >
           <AiFillGithub className="icons link-footer" />
         </a>
-        <a href="https://www.linkedin.com/in/diego-berardi-095541202?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B77P9wcucSaKjWeDwyefkiA%3D%3D">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.linkedin.com/in/diego-berardi-095541202?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B77P9wcucSaKjWeDwyefkiA%3D%3D"
+        >
           <AiFillLinkedin className="icons link-footer" />
         </a>
       </div>

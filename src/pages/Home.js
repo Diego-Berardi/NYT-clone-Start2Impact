@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context";
 
 import Header from "../components/Header";
@@ -9,25 +9,23 @@ import Footer from "../components/Footer";
 import NoMatchPage from "./NoMatchPage";
 import Loading from "./LoadingPage";
 
+import useFetch from "../useFetch";
+
+
 const Home = () => {
-  const {
-    HomePageNews,
-    showMenu,
-    setShowMenu,
-    isError,
-    isLoading,
-    fetchHomePageNews,
-  } = useGlobalContext();
+  const { setShowMenu, HomePageNews_url } = useGlobalContext();
+
+  const { data, isLoading, isError } = useFetch(HomePageNews_url);
 
   useEffect(() => {
-    fetchHomePageNews();
     setShowMenu(false);
   }, []);
 
   if (isLoading) return <Loading />;
+  if (isError) return <NoMatchPage />;
+  if (!data) return <NoMatchPage />;
 
-  if (isError || (HomePageNews.length < 1 && !isLoading))
-    return <NoMatchPage />;
+  const homePageNews = data.results;
 
   return (
     <>
@@ -38,17 +36,17 @@ const Home = () => {
           <NewsContainer
             classContainer="main-news-container"
             classItem="main-news-item"
-            listNews={HomePageNews.filter((elem, i) => i < 10)}
+            listNews={homePageNews.filter((elem, i) => i < 10)}
           />
           <NewsContainer
             classContainer="aside-news-container"
             classItem="aside-news-item"
-            listNews={HomePageNews.filter((elem, i) => i >= 10 && i < 16)}
+            listNews={homePageNews.filter((elem, i) => i >= 10 && i < 16)}
           />
           <NewsContainer
             classContainer="footer-news-container"
             classItem="footer-news-item"
-            listNews={HomePageNews.filter((elem, i) => i >= 16)}
+            listNews={homePageNews.filter((elem, i) => i >= 16)}
           />
         </section>
         <Footer />
