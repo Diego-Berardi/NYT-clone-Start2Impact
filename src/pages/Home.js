@@ -10,6 +10,7 @@ import NoMatchPage from "./NoMatchPage";
 import Loading from "./LoadingPage";
 
 import useFetch from "../useFetch";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
   if (!data) return <NoMatchPage />;
 
   const homePageNews = data.results;
+  console.log(homePageNews)
 
   return (
     <>
